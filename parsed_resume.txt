@@ -1,0 +1,111 @@
+RITIK AGARWAL 
+Mumbai, IN | P:+91-9820857214 | ritik06agarwal@gmail.com | LinkedIn | GitHub | CodeChef | LeetCode 
+ 
+A dedicated and adaptable individual with hands-on experience in machine learning, deep learning, and data analytics. 
+Skilled in software development and problem-solving, with strong foundation in telecom systems and automation. Seeking 
+to leverage academic knowledge and practical experience to contribute to innovative projects in AI, ML, and data science. 
+EDUCATION  
+ 
+ 
+Vellore Institute of Technology, 
+Chennai, Tamil Nadu 
+Bachelor of Technology in Computer Science Engineering 
+Jun 2019 – Jul-2023 
+CGPA: 8.87/10 
+Shubham Raje Junior College 
+Mumbai, Maharashtra 
+Higher Secondary School Certificate (Maharashtra Board) 
+Jul 2016 - Jul 2018 
+Result: 73.85% 
+Amity High School 
+Bharuch, Gujarat 
+Secondary School Certificate (CBSE) 
+Jul 2014 - Jul 2016 
+CGPA: 8.6/10 
+ 
+WORK EXPERIENCE 
+ 
+ 
+ 
+AMDOCS  
+Pune, Maharashtra 
+Software Developer  
+Jun 2023 - Present 
+Working in a global delivery team, implementing complex solutions for telecom companies like A1 Croatia, PPF, VEON, 
+Vodafone Ukraine, and Azercell. 
+• 
+Contributing to the design and maintenance of Rating and Charging systems. 
+• 
+Specializing in implementing complex rate calculation algorithms, optimizing processes, and ensuring seamless system 
+integration. 
+• 
+Engaged in automation tools creation using AI, along with integrating machine learning models to optimize workflow. 
+• 
+Proficient in Unix, SQL, HBase, Kubernetes, API Testing, and defect resolution. 
+ 
+YOKOHAMA OFF-HIGHWAY TIRES 
+Mumbai, Maharashtra 
+Business Intelligence Intern 
+Jun 2022 – Dec 2022 
+• 
+Conducted predictive analysis based on manufacturing data across two plants, using Python and SQL to analyze data 
+patterns and provide actionable insights for operational improvements. 
+• 
+Analyzed key logistics metrics such as truck in-time, out-time, time to reach the shipyard, and number of tires loaded per 
+truck to optimize loading processes and reduce inefficiencies 
+ 
+UNIVERSITY PROJECTS 
+ 
+Smart Contactless Airport Baggage Management and Handling System 
+• 
+Designed and implemented a contactless baggage management system using RFID and computer vision to streamline 
+baggage handling in airports. 
+• 
+Published research in Scalable and Distributed Machine Learning and Deep Learning Patterns’ on the system's effectiveness 
+in airport logistics. 
+Road Accident Analysis and Visualization 
+• 
+Developed an R Shiny Dashboard web app to analyze and visualize Indian road accident data. 
+• 
+Predicted accident rates based on weather, road conditions, and vehicle defects. 
+Indian Railways Network Analysis 
+• 
+Analyzed the structure and efficiency of the Indian Railways network using graph theory to provide insights on optimization 
+and route management. 
+ 
+ACTIVITIES  
+ 
+ 
+Fine Arts Club, VIT Chennai 
+Chennai, Tamil Nadu 
+Member 
+ 
+Aug 2019 – Present 
+● 
+Created artworks for VIT cultural fest ‘ VIBRANCE 2020’ and technical fest ‘ TECHNOVIT 2019’ 
+ 
+HackClub, VIT Chennai 
+Chennai, Tamil Nadu 
+Event Coordinator 
+Jan-2021– Dec 2021 
+● 
+Managed and Organized Valorant Gaming Tournament with over 100 participants for 3 days in HACKCLASH event. 
+ 
+ 
+ 
+
+ADDITIONAL 
+ 
+ 
+ 
+Technical Skills: 
+• Programming: Python, R, SQL, Java 
+• Data Science & Analytics: Machine Learning, Deep Learning, NLP, Data Analysis 
+• Tools & Technologies: Git, Jupyter, R Studio, Streamlit, Automation Tools, Unix, HBase, Kubernetes, API Testing 
+• Additional Skills: Problem Solving, AI-driven Automation, System Integration, Communication, Leadership, Sketching 
+Certifications: 
+• PCEP™ – Certified Entry-Level Python Programmer 
+• Google Data Analytics Professional Certificate 
+Research Publications: 
+• Smart Contactless Airport Baggage Management and Handling System, published in Scalable and Distributed Machine 
+Learning and Deep Learning Patterns
