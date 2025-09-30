@@ -12,6 +12,7 @@ import streamlit as st
 from agent import ResumeAgent
 from data_loader import load_resume
 from nlp.parser import parse_cv_text, set_debug
+from services.job_matcher import match_jobs
 
 try:
     from nlp.llm import (
@@ -54,6 +55,7 @@ if uploaded is not None:
             st.session_state.pop("experience_cache", None)
             st.session_state.pop("parsed_data", None)
             st.session_state.pop("last_parse_log", None)
+            st.session_state.pop("job_matches_cache", None)
 
         cached_data = st.session_state.get("parsed_data") if not resume_changed else None
 
@@ -76,6 +78,7 @@ if uploaded is not None:
                 if parsed_data is not None:
                     base_experience = parsed_data.get("experience", []) or []
                     st.session_state["experience_cache"] = {"Heuristic": base_experience}
+                    st.session_state["job_matches_cache"] = {}
                 st.session_state["last_parse_log"] = log_output
         else:
             parsed_data = cached_data
@@ -94,6 +97,7 @@ if uploaded is not None:
             st.session_state.pop("parsed_data", None)
             st.session_state.pop("experience_cache", None)
             st.session_state.pop("last_parse_log", None)
+            st.session_state.pop("job_matches_cache", None)
 
         with col_main:
             st.success("Resume text extracted.")
@@ -163,17 +167,42 @@ if uploaded is not None:
                     display_data = {**display_data, "experience": selected_experience}
                 st.json(display_data)
 
-                st.subheader(f"Experience — {selection}")
+                st.subheader(f"Experience - {selection}")
                 st.json(experience_cache.get(selection, base_experience))
+
+                job_cache = st.session_state.setdefault("job_matches_cache", {})
+                resume_variant = display_data
+                if selection not in job_cache:
+                    job_cache[selection] = match_jobs(resume_variant)
+                job_matches = job_cache.get(selection, [])
+
+                st.subheader("Suggested Jobs")
+                if job_matches:
+                    for job in job_matches:
+                        title = job.get("title") or "Role"
+                        company = job.get("company") or "Company"
+                        location = job.get("location") or "Location"
+                        score = job.get("score")
+                        overlap = job.get("overlap") or []
+                        description = job.get("description")
+                        st.markdown(
+                            f"**{title}** at {company} ({location})\\nScore: {score}\\nShared skills: {', '.join(overlap) if overlap else 'n/a'}"
+                        )
+                        if description:
+                            st.caption(description)
+                        st.markdown("---")
+                else:
+                    st.info("No job matches yet. Upload a resume with clear skills to see suggestions.")
 
                 try:
                     st.divider()
                 except AttributeError:
                     st.markdown("---")
+
                 st.subheader("Resume Agent")
 
-                agent_payload = {**display_data, "experience": experience_cache.get(selection, base_experience)}
-                agent = ResumeAgent(agent_payload)
+                agent_payload = resume_variant
+                agent = ResumeAgent(agent_payload, jobs=job_matches)
 
                 history_key = "agent_history"
                 history = st.session_state.setdefault(history_key, [])
@@ -199,7 +228,7 @@ if uploaded is not None:
                 if user_prompt:
                     history.append({"role": "user", "content": user_prompt})
                     if _is_short_greeting(user_prompt) and any(msg.get("role") == "assistant" for msg in history[:-1]):
-                        reply = "Hi again! Let me know what you want to explore—skills, experience, education, or projects."
+                        reply = "Hi again! Let me know what you want to explore - skills, experience, education, projects, or job matches."
                     else:
                         reply = agent.answer(user_prompt)
                     history.append({"role": "assistant", "content": reply})

@@ -1,0 +1,42 @@
+[
+  {
+    "id": "job-001",
+    "title": "Senior Machine Learning Engineer",
+    "company": "Atlas Analytics",
+    "location": "Remote",
+    "skills": ["python", "machine learning", "deep learning", "tensorflow", "pytorch", "mlops"],
+    "description": "Own the lifecycle of ML models powering personalization features. Collaborate with data and platform teams to deploy models at scale."
+  },
+  {
+    "id": "job-002",
+    "title": "Full Stack Developer",
+    "company": "BrightWave Tech",
+    "location": "San Francisco, CA",
+    "skills": ["javascript", "react", "node.js", "typescript", "sql", "aws"],
+    "description": "Ship customer-facing web experiences, build reusable UI components, and optimize APIs for speed and reliability."
+  },
+  {
+    "id": "job-003",
+    "title": "Data Scientist",
+    "company": "Insight Labs",
+    "location": "Austin, TX",
+    "skills": ["python", "sql", "statistics", "data visualization", "pandas", "machine learning"],
+    "description": "Partner with product to design experiments, model user behavior, and communicate findings with clear dashboards."
+  },
+  {
+    "id": "job-004",
+    "title": "DevOps Engineer",
+    "company": "Skyline Systems",
+    "location": "New York, NY",
+    "skills": ["aws", "docker", "kubernetes", "ci/cd", "terraform", "linux"],
+    "description": "Improve reliability of the cloud platform, automate infrastructure, and mentor developers on deployment best practices."
+  },
+  {
+    "id": "job-005",
+    "title": "AI Research Engineer",
+    "company": "Quantum Labs",
+    "location": "Boston, MA",
+    "skills": ["python", "llm", "nlp", "pytorch", "transformers", "research"],
+    "description": "Prototype and evaluate cutting-edge language models, publish findings, and collaborate with product teams to translate research into experiments."
+  }
+]

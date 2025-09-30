@@ -14,8 +14,9 @@ from typing import Any, Dict, Iterable, List, Sequence
 class ResumeAgent:
     """Responds to user prompts using parsed resume data."""
 
-    def __init__(self, resume: Dict[str, Any] | None) -> None:
+    def __init__(self, resume: Dict[str, Any] | None, jobs: List[Dict[str, Any]] | None = None) -> None:
         self.resume = resume or {}
+        self.jobs = jobs or []
 
     # -- public API -----------------------------------------------------
     def answer(self, prompt: str) -> str:
@@ -43,6 +44,9 @@ class ResumeAgent:
         if any(keyword in lowered for keyword in ("education", "degree", "school", "college")):
             return self._format_education()
 
+        if self.jobs and any(keyword in lowered for keyword in ("job match", "job suggestion", "job opening", "matching job", "open role", "jobs", "job opportunities", "open jobs")):
+            return self._format_job_matches()
+
         if any(keyword in lowered for keyword in ("experience", "job", "work", "role", "project you did at")):
             return self._format_experience()
 
@@ -63,8 +67,8 @@ class ResumeAgent:
             return company_response
 
         return (
-            "I'm set up to discuss the candidate's summary, skills, education, experience, projects, "
-            "and contact details. Try asking something like 'What are the key skills?' or 'Tell me about their recent role.'"
+            "I'm set up to discuss the candidate's summary, skills, education, experience, projects, contact details, "
+            "and job matches. Try asking something like 'What are the key skills?' or 'Any matching job openings?'"
         )
 
     # -- formatting helpers --------------------------------------------
@@ -83,6 +87,7 @@ class ResumeAgent:
             "projects",
             "contact details",
         ]
+        topics.append("job matches")
         return "I can talk about " + ", ".join(topics[:-1]) + f", or {topics[-1]}."
 
     def _summarise(self) -> str:
@@ -127,7 +132,7 @@ class ResumeAgent:
             summary = entry.get("summary") or ""
             text = " ".join(chunk).strip()
             if summary:
-                text = f"{text} — {summary}"
+                text = f"{text} - {summary}"
             if text:
                 lines.append(text)
         return "Education details:\n- " + "\n- ".join(lines) if lines else "I couldn't format the education details just yet."
@@ -147,7 +152,7 @@ class ResumeAgent:
             years = entry.get("years")
             summary = entry.get("summary") or ""
             if include_years_only and years:
-                lines.append(f"{role or company or 'Experience'} — {years}")
+                lines.append(f"{role or company or 'Experience'} - {years}")
                 continue
 
             pieces = []
@@ -161,7 +166,7 @@ class ResumeAgent:
                 pieces.append(f"[{years}]")
             text = " ".join(pieces).strip()
             if summary:
-                text = f"{text} — {summary}" if text else summary
+                text = f"{text} - {summary}" if text else summary
             if text:
                 lines.append(text)
         return "Work experience:\n- " + "\n- ".join(lines) if lines else "I couldn't format the experience details just yet."
@@ -178,10 +183,11 @@ class ResumeAgent:
             name = project.get("name")
             detail = project.get("details")
             if name and detail:
-                lines.append(f"{name} — {detail}")
+                lines.append(f"{name} - {detail}")
             elif name:
                 lines.append(name)
         return "Projects:\n- " + "\n- ".join(lines) if lines else "I couldn't format any projects."
+
     def _format_contact(self) -> str:
         contact = self.resume.get("contact") or {}
         if not isinstance(contact, dict) or not contact:
@@ -236,3 +242,24 @@ class ResumeAgent:
                     return f"At {company}, the candidate held {role} during {years}."
                 return f"The candidate held {role} at {company}."
         return None
+
+    def _format_job_matches(self) -> str:
+        if not self.jobs:
+            return "I don't have matching jobs calculated yet."
+        lines = []
+        for job in self.jobs:
+            title = job.get("title") or "Role"
+            company = job.get("company") or "Company"
+            location = job.get("location")
+            raw_score = job.get("score")
+            score = f"{float(raw_score):.2f}" if isinstance(raw_score, (int, float)) else "n/a"
+            overlap = job.get("overlap") or []
+            bullet = f"{title} at {company}"
+            if location:
+                bullet += f" ({location})"
+            if score != "n/a":
+                bullet += f" [score {score}]"
+            if overlap:
+                bullet += f" - shared skills: {', '.join(overlap)}"
+            lines.append(bullet)
+        return "Top job matches:\n- " + "\n- ".join(lines)
