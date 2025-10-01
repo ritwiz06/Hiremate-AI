@@ -1,3 +1,2 @@
-GROQ_API_KEY =  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
+GROQ_API_KEY =  YOUR_API_KEY
 
-now start with the actual conversational agent part, where the Ui also takes the form of what it needs to have, have an option to select the model while uploading the resume, and which can be changed after one model has finished parsing. Since this is a conversational AI that helps finding jobs, it should be able to suggest jobs based on the resume, it should be able to 
